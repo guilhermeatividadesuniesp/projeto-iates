@@ -18,7 +18,7 @@ function obterMensagens() {
     return retorno;
 }
 
-function inserirMensagem(nome, email, textoMensagem, mensagem) {
+function inserirMensagem(nome, email, textoMensagem) {
 
     var mensagem = {
         nome: nome,
@@ -34,20 +34,16 @@ function inserirMensagem(nome, email, textoMensagem, mensagem) {
         async: false,
         contentType: 'application/json',
     });
+
+    console.log(mensagem);
 }
 
-function validarUsuario(objLoginSenha) {
-
-    //email: admin@admin.com
-    //senha: '1234'
-
-    /*
+function validarUsuario(emailUsuario, senhaUsuario) {
 
     var objLoginSenha = {
-            email: "email informado", 
-            senha: "senha informada"} 
-
-    */
+            email: emailUsuario,
+            senha: senhaUsuario
+    }
 
     var retorno = false;
 
@@ -68,6 +64,12 @@ function validarUsuario(objLoginSenha) {
     validacao.done(function(data) {
         retorno = data;
     });
+
+    if (retorno == true) {
+        location.href = 'mensagens.html';
+    } else {
+        alert('E-mail e Senha inválidos');
+    }
 
     return retorno;
 }
