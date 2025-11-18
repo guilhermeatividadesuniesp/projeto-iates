@@ -15,7 +15,11 @@ function obterMensagens() {
         retorno = data;
     });
 
-    return retorno;
+    localStorage.setItem("mensagens", JSON.stringify(retorno));
+
+    document.getElementById("resultadoMensagens").innerHTML = retorno.map(
+        content => `${content.nome} | ${content.email} | <b>${content.mensagem}</b>`
+    ).join('<br>');
 }
 
 function inserirMensagem(nome, email, textoMensagem) {
