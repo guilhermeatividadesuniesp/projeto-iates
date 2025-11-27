@@ -18,8 +18,13 @@ function obterMensagens() {
     localStorage.setItem("mensagens", JSON.stringify(retorno));
 
     document.getElementById("resultadoMensagens").innerHTML = retorno.map(
-        content => `${content.nome} | ${content.email} | <b>${content.mensagem}</b>`
-    ).join('<br>');
+        content => `<p>${content.nome} | ${content.email} | <b>${content.mensagem}</b>
+        <br>
+        <button class="button" type"button" onClick="formatarNormal(this)">Visualizar</button>
+        <button class="button" type"button" onClick="deletarMensagem(this)">Excluir</button>
+        </p>`
+    )
+    .join('<br>');
 }
 
 function inserirMensagem(nome, email, textoMensagem) {
@@ -76,4 +81,29 @@ function validarUsuario(emailUsuario, senhaUsuario) {
     }
 
     return retorno;
+}
+
+function formatarNormal(botao) {
+    const msgContent = botao.parentElement;
+    const bold = msgContent.querySelector("b");
+
+    const confirmar = window.confirm("Vai visualizar mesmo, boy?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    if (bold) bold.style.fontWeight = "normal";  
+}
+
+function deletarMensagem(index) {
+    const objMensagem = index.parentElement;
+
+    const confirmar = window.confirm("Vai excluir mesmo, boy?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    objMensagem.remove();
 }
